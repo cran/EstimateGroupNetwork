@@ -234,7 +234,9 @@ myadmm.iters = function(S, lambda1,lambda2,penalty="fused",rho=1,rho.increment=1
   K = length(S)
   p = ncol(S[[1]])
   n=weights
-
+  
+  warned = FALSE
+  
   # initialize theta:
   theta = list()
   for(k in 1:K){theta[[k]] = diag(1/diag(S[[k]]))}
@@ -281,6 +283,29 @@ myadmm.iters = function(S, lambda1,lambda2,penalty="fused",rho=1,rho.increment=1
     # define A matrices:
     A = list()
     for(k in 1:K){ A[[k]] = theta[[k]] + W[[k]] }
+    
+    # added by GC to handle complex eigenvalues - thanks to Jonas Haslbeck for finding this error
+    if(any(sapply(A, is.complex))) 
+    {
+      A <- lapply(A, Re)
+      
+      if(!warned)
+      {
+      warning(paste0("complex eigenvalues were returned during the ADMM optimization for the following values of lambda:",
+                     "
+                     lambda1 = ", 
+                     lambda1[1,2],
+                     "
+                     lambda2 = ",
+                     lambda2[1,2],
+                     ".
+                     Set simplifyOutput = FALSE to know the selected values of lambda (see TuningParameters). If these values of lambda were selected, results might be unreliable. Solutions could include: changing the parameter covfun (es. covfun = cor) or changing the lambda parameters (arguments nlambda1, lambda1.min.ratio, nlambda2, lambda2.min.ratio, logseql1, logseql2) to a different value"))
+      warned <- TRUE
+        }
+      
+    }
+    ## end GC mod
+    
     if(penalty=="fused")
     {
       # use flsa to minimize rho/2 ||Z-A||_F^2 + P(Z):
@@ -304,8 +329,13 @@ myadmm.iters = function(S, lambda1,lambda2,penalty="fused",rho=1,rho.increment=1
     # increment rho by a constant factor:
     rho = rho*rho.increment
   }
+
+  
+  
+  
   diff = 0; for(k in 1:K){diff = diff + sum(abs(theta[[k]]-Z[[k]]))}
   out = list(theta=theta,Z=Z,diff=diff,iters=iter)
+  
   return(out)
 }
 

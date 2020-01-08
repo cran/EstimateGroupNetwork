@@ -57,7 +57,7 @@ EstimateGroupNetwork <- function(X,
              {
                stop("'groupID' must be a string corresponding to a column name in 'X' or a number corresponding to a column in 'X'. See ?EstimateGroupNetwork")
              } else {
-               grp <- as.factor(X[,groupID])
+               grp <- as.factor(X[[groupID]])
                X <- split(X[, !names(X) %in% groupID], grp)
                groups <- levels(grp)
              }
@@ -66,7 +66,7 @@ EstimateGroupNetwork <- function(X,
              {
                stop("'groupID' must be a string corresponding to a column name in 'X' or a number corresponding to a column in 'X'. See ?EstimateGroupNetwork")
              } else {
-               grp <- as.factor(X[,groupID])
+               grp <- as.factor(X[[groupID]])
                X <- split(X[, -groupID], grp)
                groups <- levels(grp)
              }
@@ -122,7 +122,7 @@ EstimateGroupNetwork <- function(X,
                       "rho" = rho,
                       "truncate" = truncate)
 
-  # assign names to variables if none exist
+  # assign names to variables if not specified
   if(missing(labels))
   {
     if(!is.null(colnames(S[[1]])))

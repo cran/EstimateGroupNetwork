@@ -1,0 +1,24 @@
+citHeader("To cite qgraph in publications use:")
+
+citEntry(entry = "Article",
+  title        = "Stability and variability of personality networks. A tutorial on recent developments in network psychometrics",
+  author       = personList(as.person("Giulio Costantini"),
+                   as.person("Juliette Richetin"),
+                   as.person("Emanuele Preti"),
+                   as.person("Erica Casini"),
+                   as.person("Sacha Epskamp"),
+				   as.person("Marco Perugini")),
+  journal      = "Personality and Individual Differences",
+  year         = "2019",
+  volume       = "136",
+  number       = "1 January 2019",
+  pages        = "68-78",
+  url          = "https://doi.org/10.1016/j.paid.2017.06.011",
+
+  textVersion  =
+  paste("Costantini, G., Richetin, R., Preti, E., Casini, E., Epskamp, S., Perugini, M. (2019)",
+        "Stability and variability of personality networks. A tutorial on recent developments in network psychometrics",
+        "Personality and Individual Differences 136, 68-78",
+        "https://doi.org/10.1016/j.paid.2017.06.011")
+)
+
