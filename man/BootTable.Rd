@@ -29,6 +29,8 @@ Summary table of the output of \link{GroupNetworkBoot}
 \item{boot.zero}{
 proportion of bootstraps, in which an edge was estimated as equal to zero (i.e., 0= edge not estimated as zero throughout bootstraps; 1= edge estimated as zero in all bootstraps)
 }
+\item{boot.pos}{Proportion of bootstraps in which an edge was estimated as >0 (i.e., positive)}
+\item{boot.neg}{Proportion of bootstraps in which an edge was estimated as <0 (i.e., negative)}
 \item{g}{group in which the edge was estimated}
 
 }

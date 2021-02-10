@@ -8,7 +8,7 @@ This function plots output from bootstrapped networks computed with \link{GroupN
 }
 \usage{
 GroupBootPlot(BootOut, GroupNames, edges.x, edges.y, 
-labels = TRUE, transparency = 0.15, point.size = 1.5, line.size = 1, 
+labels = TRUE, transparency = 0.15, point.size = 1.5, line.size = 1, scales = "fixed", 
 legend.position = "none", GroupNamesCheck = FALSE)
 }
 \arguments{
@@ -34,6 +34,9 @@ A vector of optional group names that will be printed as facet labels in plot. B
 }
 \item{line.size}{
   Set line size. 
+}
+\item{scales}{
+  Set \pkg{ggplot2} facet scales. Default is \code{scale = "fixed"}. See ?facet_grid in ggplot2 for details.
 }
 \item{legend.position}{
   Define legend position to indicate colour for sample and bootstrap means. See ?theme in ggplot2.

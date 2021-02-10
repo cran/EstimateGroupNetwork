@@ -24,7 +24,14 @@ GroupNetworkBoot <- function(
       stop("Please set simplifyOutput=FALSE in EstimateGroupNetwork of your input network.\nOtherwise this function will not run.")
    }
    
-   
+   # ---------------Check if data.frames have names------
+  
+  # If no names are present, these are added and a warning is given
+  if(is.null(names(data_list))) {
+    names(data_list) = paste0("G", 1:length(data_list))
+    warning("data.frames in list have no names associated with them, so are coerced to G1, G2, ..., Gn.")
+  }
+  
    # ---------------Save important variables-------------
    G = length(data_list) # number of samples/groups
    Gnames = names(data_list) # Get sample data.frame names

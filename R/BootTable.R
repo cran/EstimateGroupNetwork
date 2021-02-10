@@ -48,6 +48,8 @@ BootTable <- function(
     edges[i, "boot.mean"] = mean(boot_vec)
     edges[i, c("ci.lb", "ci.ub")] = quantile(boot_vec, probs = c(0.025, 0.975))
     edges[i, "boot.zero"] = sum(boot_vec == 0) / nboots
+    edges[i, "boot.pos"] = sum(boot_vec > 0) / nboots
+    edges[i, "boot.neg"] = sum(boot_vec < 0) / nboots
     
     ## Remove temporary variables
     rm(boot_vec)

@@ -9,7 +9,8 @@
 
 
 GroupBootPlot <- function(BootOut, GroupNames, edges.x, edges.y, 
-                          labels = TRUE, transparency = 0.15, point.size = 1.5, line.size = 1, 
+                          labels = TRUE, transparency = 0.15, point.size = 1.5, 
+                          line.size = 1, scales = "fixed",
                           legend.position = "none", GroupNamesCheck = FALSE)
    
 {
@@ -83,7 +84,7 @@ GroupBootPlot <- function(BootOut, GroupNames, edges.x, edges.y,
       coord_flip() +
       scale_color_manual(values = c("darkred", "black")) +
       geom_hline(yintercept = 0, col = "black") +
-      facet_grid(. ~ gnames) +
+      facet_grid(. ~ gnames, scales = scales) +
       theme_bw() +
       {if(!labels) theme(axis.text.y = element_blank())} +
       theme(legend.position = legend.position,
